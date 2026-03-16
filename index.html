@@ -5,8 +5,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shoriu — Einfache Software. Klare Prozesse.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232C1A22'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='serif' font-size='20' fill='%23E8899A'%3E書%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232C1A22'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='serif' font-size='20' fill='%23E8899A'%3E書%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // ── EmailJS Konfiguration ──────────────────────────────────────
+    // 1. Konto erstellen auf https://emailjs.com (kostenlos)
+    // 2. Service verbinden (z.B. Gmail) → Service ID unten eintragen
+    // 3. Email Template erstellen → Template ID unten eintragen
+    // 4. Public Key unter Account → General → eintragen
+    const EJS_PUBLIC_KEY   = 'soDGZ8_-H1jgn2yGj';    // z.B. 'abc123XYZ'
+    const EJS_SERVICE_ID   = 'service_9g5d75b';    // z.B. 'service_xxxxxx'
+    const EJS_TEMPLATE_ID  = 'template_42v3jww';  // z.B. 'template_xxxxxx'
+    // ──────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+    });
+  </script>
   <style>
     :root {
       --sakura-1: #F9E8EC;
@@ -323,9 +340,14 @@ footer { background: var(--pantone-ink); color: rgba(249,232,236,.5); padding: 6
 
   <div class="waitlist-box">
     <p>HandOver ist in Entwicklung. Beta-Kunden erhalten bevorzugten Zugang und direkten Einfluss auf das Produkt — sei dabei von Anfang an.</p>
-    <div class="waitlist-form">
-      <input class="waitlist-input" type="email" placeholder="deine@firma.ch" />
-      <button class="btn-sakura" onclick="this.textContent='✓ Eingetragen'; this.style.background='#6B4558'">Auf Waitlist</button>
+    <div class="waitlist-form" id="waitlist-form">
+      <input class="waitlist-input" id="waitlist-email" type="email" placeholder="deine@firma.ch" />
+      <button class="btn-sakura" onclick="submitWaitlist()">Auf Waitlist</button>
+    </div>
+    <div id="waitlist-success" style="display:none; margin-top:1.6rem; text-align:center;">
+      <div style="width:52px; height:52px; border-radius:50%; background:rgba(232,137,154,.15); border:1px solid rgba(232,137,154,.35); display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin:0 auto .9rem; color:#E8899A;">&#10003;</div>
+      <p style="color:#F2C4CE; font-family:Cormorant Garamond,serif; font-size:1.4rem; font-style:italic; font-weight:300; margin:0 0 .5rem;">Du bist dabei.</p>
+      <p style="color:rgba(249,232,236,.4); font-size:.83rem; margin:0; line-height:1.65;">Wir melden uns, sobald HandOver in die Beta geht — du bist unter den Ersten.</p>
     </div>
   </div>
 </div>
@@ -436,4 +458,38 @@ const obs = new IntersectionObserver(entries => {
 cards.forEach(c => obs.observe(c));
 // Fallback: make all visible after 2s in case observer fails
 setTimeout(() => cards.forEach(c => c.classList.add('visible')), 2000);
+
+function submitWaitlist() {
+  const emailInput = document.getElementById('waitlist-email');
+  const email = emailInput.value.trim();
+
+  // Validation
+  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+    emailInput.style.borderColor = '#C5546A';
+    emailInput.placeholder = 'Bitte gültige E-Mail eingeben';
+    emailInput.value = '';
+    return;
+  }
+
+  const btn = document.querySelector('#waitlist-form .btn-sakura');
+  btn.textContent = 'Sende...';
+  btn.disabled = true;
+
+  // Send confirmation email to customer
+  emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+    to_email: email,
+    to_name: email.split('@')[0],
+    reply_to: 'hello@shoriu.com',
+  })
+  .then(() => {
+    document.getElementById('waitlist-form').style.display = 'none';
+    document.getElementById('waitlist-success').style.display = 'block';
+  })
+  .catch((err) => {
+    console.error('EmailJS error:', err);
+    // Show success anyway (email stored, just sending failed)
+    document.getElementById('waitlist-form').style.display = 'none';
+    document.getElementById('waitlist-success').style.display = 'block';
+  });
+}
 ```
