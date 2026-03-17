@@ -70,7 +70,7 @@
       10%  { opacity:.5; }
       50%  { transform: translateY(50vh)  rotate(180deg) translateX(40px); }
       90%  { opacity:.35; }
-      100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity:0; }
+      100% { transform: translateY(300vh) rotate(360deg) translateX(-20px); opacity:0; }
     }
 
     /* NAV */
@@ -449,9 +449,9 @@
         <div class="footer-col">
           <h4>Kontakt</h4>
           <ul>
-            <li><a href="/cdn-cgi/l/email-protection#cdbea5a2bfa4b88da2b8b9a1a2a2a6e3aea2a0"><span class="__cf_email__" data-cfemail="9ceff4f3eef5e9dcf3e9e8f0f3f3f7b2fff3f1">[email&#160;protected]</span></a></li>
+            <li><a href="mailto:shoriu@outlook.com">shoriu@outlook.com</a></li>
             <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Stäfa, Zürich</a></li>
+            <li><a href="#">Altach, Österreich</a></li>
           </ul>
         </div>
       </div>
@@ -476,13 +476,7 @@
     cards.forEach(c => obs.observe(c));
     setTimeout(() => cards.forEach(c => c.classList.add('visible')), 2000);
 
-    // Petal parallax
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      document.querySelectorAll('.petal').forEach(p => {
-        p.style.transform = 'translateY(' + (y * 0.06) + 'px)';
-      });
-    });
+
 
     // EmailJS init
     window.addEventListener('load', () => {
