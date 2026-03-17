@@ -17,7 +17,8 @@
     // 4. Public Key unter Account → General → eintragen
     const EJS_PUBLIC_KEY   = 'soDGZ8_-H1jgn2yGj';    // z.B. 'abc123XYZ'
     const EJS_SERVICE_ID   = 'service_9g5d75b';    // z.B. 'service_xxxxxx'
-    const EJS_TEMPLATE_ID  = 'template_42v3jww';  // z.B. 'template_xxxxxx'
+    const EJS_TEMPLATE_ID  = 'template_42v3jww';  // Waitlist
+    const EJS_CONTACT_ID   = 'template_kdstto4';   // Kontaktformular  // z.B. 'template_xxxxxx'
     // ──────────────────────────────────────────────────────────────
     window.addEventListener('load', () => {
       if (typeof emailjs !== 'undefined') {
@@ -572,9 +573,7 @@
       if (!valid) return;
       const btn = document.querySelector('#contact-fields .modal-submit');
       btn.textContent = 'Wird gesendet...'; btn.disabled = true;
-      emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
-        to_email: 'shoriu@outlook.com',
-        to_name: 'Shoriu',
+      emailjs.send(EJS_SERVICE_ID, EJS_CONTACT_ID, {
         name: name,
         email: email,
         message: msg,
