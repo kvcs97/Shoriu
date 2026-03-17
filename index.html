@@ -206,9 +206,9 @@
     .section-tag { font-size: .7rem; letter-spacing: .28em; text-transform: uppercase; color: var(--pantone-rose); margin-bottom: .8rem; }
     .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; color: var(--pantone-ink); }
     .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
-    .val-card { opacity: 0; transform: translateY(30px); transition: opacity .7s, transform .7s; padding: 2.4rem 2rem; border-radius: 18px; background: var(--pantone-fog); border: 1px solid rgba(197,84,106,.08); }
-    .val-card.visible { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion), (max-width: 768px) { .val-card { opacity: 1; transform: none; } }
+    .val-card { opacity: 1; transform: translateY(0); transition: opacity .7s, transform .7s; padding: 2.4rem 2rem; border-radius: 18px; background: var(--pantone-fog); border: 1px solid rgba(197,84,106,.08); }
+    .val-card.animate { opacity: 0; transform: translateY(30px); }
+    .val-card.animate.visible { opacity: 1; transform: translateY(0); }
     .val-num { font-family: 'Noto Serif JP', serif; font-size: 1.4rem; color: var(--sakura-2); margin-bottom: 1rem; }
     .val-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--pantone-ink); margin-bottom: .5rem; }
     .val-card p { font-size: .85rem; color: var(--text-mid); line-height: 1.65; }
@@ -355,16 +355,16 @@
         <div class="waitlist-form" id="waitlist-form">
           <div class="form-row">
             <div class="form-field">
-              <label class="form-label">Name *</label>
+              <label class="form-label" for="waitlist-name">Name *</label>
               <input class="waitlist-input" id="waitlist-name" type="text" placeholder="Max Muster" />
             </div>
             <div class="form-field">
-              <label class="form-label">E-Mail *</label>
+              <label class="form-label" for="waitlist-email">E-Mail *</label>
               <input class="waitlist-input" id="waitlist-email" type="email" placeholder="max@firma.ch" />
             </div>
           </div>
           <div class="form-field">
-            <label class="form-label">Nachricht <span style="opacity:.45">(optional)</span></label>
+            <label class="form-label" for="waitlist-message">Nachricht <span style="opacity:.45">(optional)</span></label>
             <textarea class="waitlist-input waitlist-textarea" id="waitlist-message" placeholder="Erzähl uns kurz von deinem Betrieb oder deinen Anforderungen..."></textarea>
           </div>
           <div class="form-submit">
@@ -469,9 +469,10 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // Scroll reveal
     const cards = document.querySelectorAll('.val-card');
+    cards.forEach(c => c.classList.add('animate'));
     const obs = new IntersectionObserver(entries => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
@@ -481,7 +482,7 @@
       });
     }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
     cards.forEach(c => obs.observe(c));
-    setTimeout(() => cards.forEach(c => c.classList.add('visible')), 2000);
+    setTimeout(() => cards.forEach(c => c.classList.add('visible')), 1500);
 
 
 
