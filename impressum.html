@@ -10,8 +10,8 @@
       --sakura:   #e8a0b0;
       --sakura-light: #f5dce3;
       --ink:      #1a1612;
-      --ink-soft: #4a3f38;
-      --parchment: #faf8f5;
+      --ink-soft: #2e261f;
+      --parchment: #f5f0ec;
       --line:     rgba(26,22,18,0.08);
     }
 
@@ -120,7 +120,7 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--ink-soft);
-      opacity: 0.5;
+      opacity: 0.7;
       margin-top: 0.5rem;
     }
 
@@ -141,7 +141,7 @@
 
     section p, section address {
       font-size: 0.975rem;
-      color: var(--ink-soft);
+      color: #2e261f;
       font-style: normal;
       line-height: 1.9;
     }
@@ -158,14 +158,14 @@
       width: 40px;
       height: 1px;
       background: var(--sakura);
-      opacity: 0.4;
+      opacity: 0.65;
       margin: 3rem 0;
     }
 
     .note {
       font-size: 0.82rem;
       color: var(--ink-soft);
-      opacity: 0.55;
+      opacity: 0.75;
       line-height: 1.7;
       font-style: italic;
     }
@@ -180,7 +180,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       color: var(--ink-soft);
-      opacity: 0.4;
+      opacity: 0.65;
     }
 
     /* ── Fade in ── */
@@ -194,10 +194,37 @@
       header { padding: 1.25rem 1.5rem; }
       main { padding: 7rem 1.5rem 4rem; }
     }
+
+    /* Petals */
+    .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+    .petal { position: absolute; top: -60px; background: radial-gradient(ellipse at 40% 40%, #F9E0E8 0%, #e8a0b0 80%); border-radius: 50% 0 50% 0; opacity: 0; animation: fall linear infinite; }
+    .petal:nth-child(1)  { left:5%;  width:8px;  height:11px; animation-duration:14s; animation-delay:0s;  }
+    .petal:nth-child(2)  { left:15%; width:12px; height:16px; animation-duration:18s; animation-delay:3s;  }
+    .petal:nth-child(3)  { left:25%; width:7px;  height:10px; animation-duration:12s; animation-delay:7s;  }
+    .petal:nth-child(4)  { left:38%; width:9px;  height:13px; animation-duration:16s; animation-delay:1s;  }
+    .petal:nth-child(5)  { left:50%; width:11px; height:15px; animation-duration:20s; animation-delay:5s;  }
+    .petal:nth-child(6)  { left:62%; width:8px;  height:11px; animation-duration:13s; animation-delay:9s;  }
+    .petal:nth-child(7)  { left:74%; width:10px; height:14px; animation-duration:17s; animation-delay:2s;  }
+    .petal:nth-child(8)  { left:85%; width:7px;  height:10px; animation-duration:11s; animation-delay:6s;  }
+    .petal:nth-child(9)  { left:92%; width:13px; height:17px; animation-duration:19s; animation-delay:4s;  }
+    .petal:nth-child(10) { left:44%; width:6px;  height:9px;  animation-duration:15s; animation-delay:11s; }
+    @keyframes fall {
+      0%   { transform: translateY(-60px) rotate(0deg)   translateX(0);    opacity:0; }
+      10%  { opacity:.45; }
+      50%  { transform: translateY(50vh)  rotate(180deg) translateX(40px); }
+      90%  { opacity:.3; }
+      100% { transform: translateY(300vh) rotate(360deg) translateX(-20px); opacity:0; }
+    }
   </style>
 </head>
 <body>
 
+
+<div class="petal-container" aria-hidden="true">
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+</div>
 <header>
   <a href="/" class="logo">書流 <span>Shoriu</span></a>
   <a href="/" class="back-link">← Zurück</a>
@@ -226,7 +253,7 @@
     <h2>Kontakt</h2>
     <p>
       Kontaktformular: <a href="/#contact">shoriu.com/#contact</a><br />
-      E-Mail: <a href="mailto:shoriu@outlook.com">shoriu@outlook.com</a>
+      E-Mail: <a href="/cdn-cgi/l/email-protection#a6d5cec9d4cfd3e6c9d3d2cac9c9cd88c5c9cb"><span class="__cf_email__" data-cfemail="65160d0a170c10250a1011090a0a0e4b060a08">[email&#160;protected]</span></a>
     </p>
   </section>
 
@@ -268,12 +295,4 @@
 </main>
 
 <footer>
-  &copy; <span id="year"></span> Shoriu · Adam Kovacs · Altach, Österreich
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-</body>
-</html>
+  &copy; <span id="year"></span> Shoriu · Adam Kovacs · Altach,
