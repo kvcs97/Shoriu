@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HandOver – Shoriu</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232C1A22'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='serif' font-size='20' fill='%23E8899A'%3E書%3C/text%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script data-cfasync="false">
+    const EJS_PUBLIC_KEY  = 'soDGZ8_-H1jgn2yGj';
+    const EJS_SERVICE_ID  = 'service_9g5d75b';
+    const EJS_TEMPLATE_ID = 'template_42v3jww';
+    window.addEventListener('load', () => {
+      if (typeof emailjs !== 'undefined') emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+    });
+  </script>
+  <style>
+    :root {
+      --sakura-1:#F9E8EC; --sakura-2:#F2C4CE; --sakura-3:#E8899A; --sakura-4:#C5546A;
+      --pantone-rose:#D4829A; --pantone-ink:#2C1A22; --pantone-fog:#F5EEF0;
+      --white:#FDFAF9; --text-main:#1E1118; --text-mid:#6B4558; --text-light:#B08090;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{background:var(--white);color:var(--text-main);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
+
+    /* PETALS */
+    .petal-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+    .petal{position:absolute;top:-60px;background:radial-gradient(ellipse at 40% 40%,#F9E0E8 0%,#E8899A 80%);border-radius:50% 0 50% 0;opacity:0;animation:fall linear infinite;}
+    .petal:nth-child(1){left:5%;width:8px;height:11px;animation-duration:14s;animation-delay:0s;}
+    .petal:nth-child(2){left:15%;width:12px;height:16px;animation-duration:18s;animation-delay:3s;}
+    .petal:nth-child(3){left:25%;width:7px;height:10px;animation-duration:12s;animation-delay:7s;}
+    .petal:nth-child(4){left:38%;width:9px;height:13px;animation-duration:16s;animation-delay:1s;}
+    .petal:nth-child(5){left:50%;width:11px;height:15px;animation-duration:20s;animation-delay:5s;}
+    .petal:nth-child(6){left:62%;width:8px;height:11px;animation-duration:13s;animation-delay:9s;}
+    .petal:nth-child(7){left:74%;width:10px;height:14px;animation-duration:17s;animation-delay:2s;}
+    .petal:nth-child(8){left:85%;width:7px;height:10px;animation-duration:11s;animation-delay:6s;}
+    .petal:nth-child(9){left:92%;width:13px;height:17px;animation-duration:19s;animation-delay:4s;}
+    .petal:nth-child(10){left:44%;width:6px;height:9px;animation-duration:15s;animation-delay:11s;}
+    @keyframes fall{0%{transform:translateY(-60px) rotate(0deg) translateX(0);opacity:0;}10%{opacity:.5;}50%{transform:translateY(50vh) rotate(180deg) translateX(40px);}90%{opacity:.35;}100%{transform:translateY(300vh) rotate(360deg) translateX(-20px);opacity:0;}}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(253,250,249,0.72);backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid rgba(232,137,154,0.12);}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;letter-spacing:.06em;color:var(--pantone-ink);text-decoration:none;}
+    .nav-logo span{font-family:'Noto Serif JP',serif;font-weight:200;font-size:.85em;color:var(--pantone-rose);margin-left:6px;}
+    .nav-links{display:flex;gap:2.4rem;list-style:none;}
+    .nav-links a{text-decoration:none;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;color:var(--text-mid);transition:color .2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--sakura-4);}
+    .nav-cta{background:var(--pantone-ink);color:var(--white) !important;padding:8px 20px !important;border-radius:40px;transition:background .2s !important;}
+    .nav-cta:hover{background:var(--sakura-4) !important;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    /* HERO */
+    #hero{position:relative;z-index:1;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 6% 60px;overflow:hidden;}
+    #hero::before{content:'渡';position:absolute;font-family:'Noto Serif JP',serif;font-size:clamp(18rem,38vw,42rem);font-weight:200;color:transparent;-webkit-text-stroke:1px rgba(232,137,154,0.08);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;line-height:1;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(197,84,106,.08);border:1px solid rgba(197,84,106,.2);border-radius:40px;padding:6px 16px;margin-bottom:1.6rem;}
+    .badge-dot{width:7px;height:7px;border-radius:50%;background:var(--sakura-3);animation:blink 2s ease-in-out infinite;}
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+    .badge-txt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sakura-4);}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,7rem);font-weight:300;line-height:1.04;color:var(--pantone-ink);letter-spacing:-.01em;margin-bottom:1.2rem;animation:fadeUp .9s .2s both;}
+    .hero-title em{font-style:italic;color:var(--sakura-3);}
+    .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--text-mid);margin-bottom:1rem;animation:fadeUp .9s .35s both;}
+    .hero-sub{max-width:520px;margin:0 auto 2.4rem;font-size:1rem;color:var(--text-mid);line-height:1.7;animation:fadeUp .9s .5s both;}
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .9s .65s both;}
+    .btn-primary{background:var(--pantone-ink);color:var(--white);border:none;cursor:pointer;padding:14px 34px;border-radius:40px;font-family:'DM Sans',sans-serif;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;transition:background .25s,transform .15s;text-decoration:none;display:inline-block;}
+    .btn-primary:hover{background:var(--sakura-4);transform:scale(1.03);}
+    .btn-ghost{background:transparent;color:var(--text-mid);border:1px solid rgba(197,84,106,.3);cursor:pointer;padding:14px 34px;border-radius:40px;font-family:'DM Sans',sans-serif;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;transition:border-color .25s,color .25s;text-decoration:none;display:inline-block;}
+    .btn-ghost:hover{border-color:var(--sakura-4);color:var(--sakura-4);}
+
+    /* SECTION COMMONS */
+    section{position:relative;z-index:1;}
+    .section-tag{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pantone-rose);margin-bottom:.8rem;display:block;}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:var(--pantone-ink);margin-bottom:1rem;}
+    .section-title em{font-style:italic;color:var(--sakura-3);}
+
+    /* ANIMATED DEMO */
+    #demo-auto{background:var(--pantone-ink);padding:100px 8%;overflow:hidden;}
+    .demo-inner{max-width:960px;margin:0 auto;}
+    .demo-header{text-align:center;margin-bottom:3.5rem;}
+    .phone-wrap{display:flex;justify-content:center;margin-bottom:3rem;}
+    .phone{width:280px;background:#1a0e14;border-radius:36px;border:2px solid rgba(232,137,154,.2);overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);}
+    .phone-notch{height:28px;background:#1a0e14;display:flex;align-items:center;justify-content:center;}
+    .phone-notch-bar{width:80px;height:6px;background:#2a1620;border-radius:10px;}
+    .phone-screen{background:#f5f0ec;min-height:420px;position:relative;overflow:hidden;}
+    .screen-slide{position:absolute;inset:0;padding:18px;opacity:0;transform:translateX(30px);transition:opacity .5s,transform .5s;pointer-events:none;}
+    .screen-slide.active{opacity:1;transform:translateX(0);pointer-events:auto;}
+    .screen-slide.exit{opacity:0;transform:translateX(-30px);}
+    .s-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+    .s-app-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#2C1A22;font-weight:600;}
+    .s-app-sub{font-size:.62rem;color:#B08090;letter-spacing:.1em;text-transform:uppercase;}
+    .s-step-badge{background:rgba(197,84,106,.1);border:1px solid rgba(197,84,106,.2);border-radius:20px;padding:3px 10px;font-size:.62rem;color:#C5546A;letter-spacing:.1em;}
+    .s-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#D4829A;margin-bottom:5px;}
+    .s-input{background:white;border:1.5px solid #E8899A;border-radius:8px;padding:9px 12px;font-size:.88rem;color:#2C1A22;font-family:'DM Sans',sans-serif;width:100%;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+    .s-data-row{display:flex;justify-content:space-between;background:white;border-radius:8px;padding:9px 12px;margin-bottom:7px;border:1px solid rgba(232,137,154,.15);}
+    .s-data-key{font-size:.7rem;color:#B08090;}
+    .s-data-val{font-size:.76rem;color:#2C1A22;font-weight:500;}
+    .s-progress{background:rgba(197,84,106,.08);border-radius:8px;padding:10px;margin-bottom:10px;}
+    .s-progress-label{font-size:.62rem;color:#D4829A;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+    .s-progress-bar{height:5px;background:rgba(197,84,106,.15);border-radius:10px;overflow:hidden;}
+    .s-progress-fill{height:100%;background:linear-gradient(90deg,#E8899A,#C5546A);border-radius:10px;transition:width 1s ease;}
+    .s-btn{background:#2C1A22;color:white;border:none;border-radius:8px;padding:10px;width:100%;font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:6px;}
+    .s-sig-area{background:white;border:1.5px dashed rgba(197,84,106,.4);border-radius:10px;height:72px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+    .s-sig-hint{font-size:.73rem;color:#B08090;font-style:italic;}
+    .s-sig-drawn{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-style:italic;color:#2C1A22;opacity:0;transition:opacity .5s;}
+    .s-check{text-align:center;padding:16px 0;}
+    .s-check-icon{width:48px;height:48px;background:linear-gradient(135deg,#E8899A,#C5546A);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.3rem;color:white;}
+    .s-check h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#2C1A22;margin-bottom:5px;}
+    .s-check p{font-size:.72rem;color:#B08090;line-height:1.5;}
+    .s-file-row{display:flex;align-items:center;gap:8px;background:white;border-radius:8px;padding:9px 12px;border:1px solid rgba(232,137,154,.15);margin-top:8px;}
+    .s-file-icon{width:26px;height:26px;background:rgba(197,84,106,.1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#C5546A;flex-shrink:0;}
+    .s-file-name{font-size:.73rem;color:#2C1A22;}
+    .s-file-meta{font-size:.63rem;color:#B08090;}
+    .s-cursor{display:inline-block;width:2px;height:.85em;background:#C5546A;margin-left:2px;animation:cursorBlink .8s step-end infinite;vertical-align:middle;}
+    @keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+    .demo-steps{display:flex;justify-content:center;max-width:680px;margin:0 auto;}
+    .demo-step-item{flex:1;text-align:center;position:relative;}
+    .demo-step-item::before{content:'';position:absolute;top:14px;left:50%;width:100%;height:1px;background:rgba(232,137,154,.15);z-index:0;}
+    .demo-step-item:last-child::before{display:none;}
+    .dsi-dot{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(232,137,154,.25);background:transparent;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:rgba(249,232,236,.3);position:relative;z-index:1;transition:all .4s;}
+    .dsi-dot.done{background:var(--sakura-4);border-color:var(--sakura-4);color:white;}
+    .dsi-dot.active{border-color:var(--sakura-3);color:var(--sakura-2);box-shadow:0 0 0 4px rgba(232,137,154,.12);}
+    .dsi-label{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(249,232,236,.3);transition:color .4s;}
+    .dsi-label.active{color:var(--sakura-2);}
+
+    /* INTERACTIVE SIM */
+    #demo-sim{background:var(--pantone-fog);padding:100px 8%;}
+    .sim-inner{max-width:1000px;margin:0 auto;}
+    .sim-header{text-align:center;margin-bottom:3rem;}
+    .sim-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:3.5rem;align-items:start;}
+    .sim-steps-nav{display:flex;flex-direction:column;gap:.5rem;}
+    .sim-step-btn{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;border-radius:12px;border:1px solid rgba(197,84,106,.12);background:transparent;cursor:pointer;text-align:left;transition:all .25s;}
+    .sim-step-btn:hover{background:rgba(197,84,106,.05);border-color:rgba(197,84,106,.25);}
+    .sim-step-btn.active{background:white;border-color:var(--sakura-3);box-shadow:0 4px 20px rgba(197,84,106,.1);}
+    .ssb-num{width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(197,84,106,.25);display:flex;align-items:center;justify-content:center;font-family:'Noto Serif JP',serif;font-size:.75rem;color:var(--text-light);flex-shrink:0;transition:all .25s;}
+    .sim-step-btn.active .ssb-num{background:var(--sakura-4);border-color:var(--sakura-4);color:white;}
+    .ssb-text h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--pantone-ink);margin-bottom:.1rem;}
+    .ssb-text p{font-size:.76rem;color:var(--text-light);}
+    .sim-display{background:white;border:1px solid rgba(197,84,106,.12);border-radius:18px;padding:2rem;min-height:320px;box-shadow:0 8px 32px rgba(44,26,34,.06);}
+    .sim-panel{display:none;animation:fadeUp .35s ease;}
+    .sim-panel.active{display:block;}
+    .sim-panel h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--pantone-ink);margin-bottom:.4rem;}
+    .sim-panel h3 em{font-style:italic;color:var(--sakura-3);}
+    .sim-panel>p{font-size:.87rem;color:var(--text-mid);line-height:1.7;margin-bottom:1.3rem;}
+    .sim-input-demo{background:var(--pantone-fog);border:1.5px solid rgba(197,84,106,.25);border-radius:10px;padding:11px 16px;display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+    .sim-input-demo svg{color:var(--sakura-3);flex-shrink:0;}
+    .sim-input-val{font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--pantone-ink);}
+    .sim-cursor{display:inline-block;width:2px;height:.9em;background:var(--sakura-4);margin-left:2px;animation:cursorBlink .8s step-end infinite;vertical-align:middle;}
+    .sim-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem;}
+    .sim-data-card{background:var(--pantone-fog);border-radius:8px;padding:.8rem .9rem;}
+    .sim-data-card .k{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--pantone-rose);margin-bottom:.2rem;}
+    .sim-data-card .v{font-size:.88rem;color:var(--pantone-ink);font-weight:400;}
+    .sim-printer{display:flex;align-items:center;gap:1rem;background:var(--pantone-fog);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:1rem;}
+    .sim-printer-icon{width:38px;height:38px;background:var(--pantone-ink);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .sim-printer-icon svg{color:var(--sakura-2);}
+    .sim-printer-info p:first-child{font-size:.85rem;color:var(--pantone-ink);font-weight:400;}
+    .sim-printer-info p:last-child{font-size:.73rem;color:var(--text-light);}
+    .sim-print-progress{height:4px;background:rgba(197,84,106,.15);border-radius:10px;overflow:hidden;}
+    .sim-print-fill{height:100%;background:linear-gradient(90deg,#E8899A,#C5546A);border-radius:10px;width:0;transition:width 1.5s ease;}
+    .sim-sig-pad{border:1.5px dashed rgba(197,84,106,.35);border-radius:12px;height:90px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;background:var(--pantone-fog);cursor:pointer;transition:border-color .2s;}
+    .sim-sig-pad:hover{border-color:var(--sakura-3);}
+    .sim-sig-hint{font-size:.82rem;color:var(--text-light);font-style:italic;}
+    .sim-sig-signed{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-style:italic;color:var(--pantone-ink);opacity:0;transition:opacity .5s;}
+    .sim-check-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(197,84,106,.08);border:1px solid rgba(197,84,106,.2);border-radius:20px;padding:4px 12px;font-size:.72rem;color:var(--sakura-4);letter-spacing:.08em;margin-top:.5rem;}
+    .sim-archive{background:var(--pantone-fog);border-radius:12px;padding:1.2rem;}
+    .sim-archive-file{display:flex;align-items:center;gap:.9rem;margin-bottom:.7rem;}
+    .sim-archive-icon{width:36px;height:36px;background:rgba(197,84,106,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .sim-archive-icon svg{color:var(--sakura-4);}
+    .sim-archive-meta p:first-child{font-size:.85rem;color:var(--pantone-ink);font-weight:400;}
+    .sim-archive-meta p:last-child{font-size:.71rem;color:var(--text-light);}
+
+    /* COMPARISON */
+    #comparison{padding:100px 8%;background:var(--white);}
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;max-width:960px;margin-left:auto;margin-right:auto;}
+    .comp-col{border-radius:16px;overflow:hidden;}
+    .comp-header{padding:1.1rem 1.7rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;}
+    .comp-old .comp-header{background:#f0ebe8;color:#9a8070;}
+    .comp-new .comp-header{background:var(--pantone-ink);color:var(--sakura-2);}
+    .comp-row{display:flex;align-items:flex-start;gap:.8rem;padding:.95rem 1.7rem;border-bottom:1px solid rgba(197,84,106,.07);}
+    .comp-old .comp-row{background:white;}
+    .comp-new .comp-row{background:rgba(44,26,34,.03);}
+    .comp-old .comp-row:last-child,.comp-new .comp-row:last-child{border-bottom:none;}
+    .comp-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
+    .comp-text p:first-child{font-size:.87rem;color:var(--text-main);font-weight:400;margin-bottom:.12rem;}
+    .comp-text p:last-child{font-size:.77rem;color:var(--text-light);line-height:1.5;}
+
+    /* FEATURES */
+    #features{padding:100px 8%;background:var(--sakura-1);}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(197,84,106,.1);border:1px solid rgba(197,84,106,.1);border-radius:16px;overflow:hidden;margin-top:3rem;}
+    .feat-card{background:white;padding:2rem 1.8rem;transition:background .2s;}
+    .feat-card:hover{background:var(--pantone-fog);}
+    .feat-icon{width:34px;height:34px;margin-bottom:.8rem;color:var(--sakura-4);}
+    .feat-card h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--pantone-ink);margin-bottom:.3rem;}
+    .feat-card p{font-size:.82rem;color:var(--text-mid);line-height:1.6;}
+
+    /* PRICING */
+    #pricing{padding:100px 8%;background:var(--pantone-ink);overflow:hidden;position:relative;}
+    #pricing::before{content:'価格';position:absolute;font-family:'Noto Serif JP',serif;font-size:28rem;font-weight:200;color:transparent;-webkit-text-stroke:1px rgba(232,137,154,.05);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+    .pricing-inner{max-width:700px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+    .pricing-inner .section-title{color:var(--sakura-1);}
+    .pricing-inner>p{font-size:.94rem;color:rgba(249,232,236,.45);line-height:1.75;margin-bottom:2.5rem;max-width:480px;margin-left:auto;margin-right:auto;}
+    .pricing-box{display:inline-flex;align-items:center;gap:1.2rem;background:rgba(232,137,154,.08);border:1px solid rgba(232,137,154,.2);border-radius:14px;padding:1.4rem 2rem;margin-bottom:2.5rem;text-align:left;}
+    .pricing-box .pb-kanji{font-family:'Noto Serif JP',serif;font-size:2rem;color:var(--sakura-3);}
+    .pricing-box p strong{display:block;color:var(--sakura-2);font-size:.97rem;margin-bottom:.25rem;font-weight:400;}
+    .pricing-box p{font-size:.83rem;color:rgba(249,232,236,.4);line-height:1.55;}
+
+    /* WAITLIST */
+    #waitlist{padding:100px 8%;background:var(--pantone-fog);}
+    .waitlist-inner{max-width:520px;margin:0 auto;text-align:center;}
+    .waitlist-inner>p{font-size:.94rem;color:var(--text-mid);line-height:1.7;margin-bottom:2.2rem;}
+    .wl-form{background:white;border:1px solid rgba(197,84,106,.12);border-radius:18px;padding:2.2rem 1.8rem;display:flex;flex-direction:column;gap:.9rem;}
+    .wl-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+    .wl-field{display:flex;flex-direction:column;gap:.3rem;}
+    .wl-label{font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pantone-rose);}
+    .wl-input{background:var(--pantone-fog);border:1px solid rgba(197,84,106,.18);border-radius:8px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:.87rem;color:var(--pantone-ink);outline:none;transition:border-color .2s;}
+    .wl-input::placeholder{color:rgba(44,26,34,.22);}
+    .wl-input:focus{border-color:var(--sakura-3);background:white;}
+    .wl-textarea{resize:vertical;min-height:75px;}
+    .wl-submit{background:var(--pantone-ink);color:white;border:none;cursor:pointer;padding:13px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.87rem;letter-spacing:.08em;text-transform:uppercase;transition:background .2s,transform .15s;}
+    .wl-submit:hover{background:var(--sakura-4);transform:translateY(-1px);}
+    .wl-success{display:none;text-align:center;padding:2rem;}
+    .wl-success p:first-child{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;color:var(--pantone-ink);margin-bottom:.5rem;}
+    .wl-success p:last-child{font-size:.85rem;color:var(--text-mid);line-height:1.65;}
+
+    /* FOOTER */
+    footer{background:var(--pantone-ink);color:rgba(249,232,236,.5);padding:40px 8%;position:relative;z-index:1;}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.75rem;color:rgba(249,232,236,.28);}
+    .footer-links-row{display:flex;gap:1.6rem;}
+    .footer-links-row a{text-decoration:none;color:rgba(249,232,236,.35);transition:color .2s;font-size:.75rem;}
+    .footer-links-row a:hover{color:var(--sakura-2);}
+    .footer-jp{font-family:'Noto Serif JP',serif;font-size:.75rem;color:rgba(249,232,236,.18);letter-spacing:.12em;}
+
+    @media(max-width:768px){
+      .nav-links{display:none;}
+      .sim-layout{grid-template-columns:1fr;}
+      .comparison-grid{grid-template-columns:1fr;}
+      .wl-row{grid-template-columns:1fr;}
+      .phone{width:240px;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="petal-container" aria-hidden="true">
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  </div>
+
+  <nav>
+    <a class="nav-logo" href="/"><span>書流</span> Shoriu</a>
+    <ul class="nav-links">
+      <li><a href="/handover.html" class="active">HandOver</a></li>
+      <li><a href="/#about">Über uns</a></li>
+      <li><a href="/anfrage.html">Individuelle Lösung</a></li>
+      <li><a href="#waitlist" class="nav-cta">Waitlist</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-badge"><div class="badge-dot"></div><span class="badge-txt">In Entwicklung &nbsp;·&nbsp; Beta 2026</span></div>
+    <h1 class="hero-title">Hand<em>Over</em></h1>
+    <p class="hero-tagline">„Referenz eingeben. Unterschreiben. Fertig."</p>
+    <p class="hero-sub">Der schnellste Weg, eine Lagerübergabe zu dokumentieren — digital, rechtssicher, in unter 60 Sekunden.</p>
+    <div class="hero-actions">
+      <a href="#demo-auto" class="btn-primary">Demo ansehen</a>
+      <a href="#waitlist" class="btn-ghost">Auf Waitlist</a>
+    </div>
+  </section>
+
+  <!-- ANIMATED DEMO -->
+  <section id="demo-auto">
+    <div class="demo-inner">
+      <div class="demo-header">
+        <span class="section-tag" style="color:var(--sakura-2);">Automatische Demo</span>
+        <h2 class="section-title" style="color:var(--sakura-1);">60 Sekunden. <em style="color:var(--sakura-3);">Kein Papier.</em></h2>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-bar"></div></div>
+          <div class="phone-screen">
+            <!-- Slide 0: Referenz -->
+            <div class="screen-slide active" id="slide-0">
+              <div class="s-header">
+                <div><div class="s-app-name">HandOver</div><div class="s-app-sub">Übergabe starten</div></div>
+                <div class="s-step-badge">① Referenz</div>
+              </div>
+              <div class="s-label">Auftragsnummer</div>
+              <div class="s-input">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E8899A" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+                <span id="auto-typing"></span><span class="s-cursor"></span>
+              </div>
+              <div class="s-progress">
+                <div class="s-progress-label">Daten werden geladen</div>
+                <div class="s-progress-bar"><div class="s-progress-fill" id="load-bar" style="width:0%"></div></div>
+              </div>
+            </div>
+            <!-- Slide 1: Daten -->
+            <div class="screen-slide" id="slide-1">
+              <div class="s-header">
+                <div><div class="s-app-name">HandOver</div><div class="s-app-sub">Auftrag gefunden</div></div>
+                <div class="s-step-badge">② Daten</div>
+              </div>
+              <div class="s-data-row"><span class="s-data-key">Auftrag</span><span class="s-data-val">AUF-2024-8821</span></div>
+              <div class="s-data-row"><span class="s-data-key">Empfänger</span><span class="s-data-val">Müller AG</span></div>
+              <div class="s-data-row"><span class="s-data-key">Artikel</span><span class="s-data-val">Hydraulikpumpe ×3</span></div>
+              <div class="s-data-row"><span class="s-data-key">Lagerplatz</span><span class="s-data-val">A-12 / Regal 4</span></div>
+              <button class="s-btn">Dokument drucken →</button>
+            </div>
+            <!-- Slide 2: Druck -->
+            <div class="screen-slide" id="slide-2">
+              <div class="s-header">
+                <div><div class="s-app-name">HandOver</div><div class="s-app-sub">Drucken</div></div>
+                <div class="s-step-badge">③ Druck</div>
+              </div>
+              <div class="s-progress" style="margin-bottom:12px;">
+                <div class="s-progress-label">Druckt auf: Lager-Drucker A</div>
+                <div class="s-progress-bar"><div class="s-progress-fill" id="print-bar" style="width:0%"></div></div>
+              </div>
+              <div class="s-data-row"><span class="s-data-key">Status</span><span class="s-data-val" id="print-status">Wird gesendet…</span></div>
+              <div class="s-data-row"><span class="s-data-key">Drucker</span><span class="s-data-val">Lager A · Online</span></div>
+            </div>
+            <!-- Slide 3: Unterschrift -->
+            <div class="screen-slide" id="slide-3">
+              <div class="s-header">
+                <div><div class="s-app-name">HandOver</div><div class="s-app-sub">Unterschrift</div></div>
+                <div class="s-step-badge">④ Signatur</div>
+              </div>
+              <div class="s-label">Unterschrift Empfänger</div>
+              <div class="s-sig-area">
+                <span class="s-sig-hint" id="sig-hint">Hier unterschreiben…</span>
+                <span class="s-sig-drawn" id="sig-drawn">M. Müller</span>
+              </div>
+              <div class="s-data-row"><span class="s-data-key">Zeit</span><span class="s-data-val" id="sig-time">—</span></div>
+              <div class="s-data-row"><span class="s-data-key">Gerät</span><span class="s-data-val">Tablet · Lager A</span></div>
+            </div>
+            <!-- Slide 4: Archiviert -->
+            <div class="screen-slide" id="slide-4">
+              <div class="s-check">
+                <div class="s-check-icon">✓</div>
+                <h3>Übergabe abgeschlossen</h3>
+                <p>Archiviert · Signiert · Timestamp gesetzt</p>
+                <div class="s-file-row">
+                  <div class="s-file-icon">PDF</div>
+                  <div>
+                    <div class="s-file-name">AUF-2024-8821.pdf</div>
+                    <div class="s-file-meta">124 KB · mit Signatur</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-steps">
+        <div class="demo-step-item"><div class="dsi-dot active" id="dot-0">①</div><div class="dsi-label active" id="lbl-0">Referenz</div></div>
+        <div class="demo-step-item"><div class="dsi-dot" id="dot-1">②</div><div class="dsi-label" id="lbl-1">Daten</div></div>
+        <div class="demo-step-item"><div class="dsi-dot" id="dot-2">③</div><div class="dsi-label" id="lbl-2">Druck</div></div>
+        <div class="demo-step-item"><div class="dsi-dot" id="dot-3">④</div><div class="dsi-label" id="lbl-3">Signatur</div></div>
+        <div class="demo-step-item"><div class="dsi-dot" id="dot-4">✓</div><div class="dsi-label" id="lbl-4">Archiviert</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SIM -->
+  <section id="demo-sim">
+    <div class="sim-inner">
+      <div class="sim-header">
+        <span class="section-tag">Interaktive Demo</span>
+        <h2 class="section-title">Probier es <em>selbst</em> aus.</h2>
+        <p style="font-size:.94rem;color:var(--text-mid);margin-top:.4rem;">Klick dich durch jeden Schritt — so fühlt sich HandOver an.</p>
+      </div>
+      <div class="sim-layout">
+        <div class="sim-steps-nav">
+          <button class="sim-step-btn active" data-step="0"><div class="ssb-num">①</div><div class="ssb-text"><h4>Referenz eingeben</h4><p>Tastatur, Barcode oder QR</p></div></button>
+          <button class="sim-step-btn" data-step="1"><div class="ssb-num">②</div><div class="ssb-text"><h4>Daten laden</h4><p>Automatisch via API</p></div></button>
+          <button class="sim-step-btn" data-step="2"><div class="ssb-num">③</div><div class="ssb-text"><h4>Dokument drucken</h4><p>Push an Netzwerkdrucker</p></div></button>
+          <button class="sim-step-btn" data-step="3"><div class="ssb-num">④</div><div class="ssb-text"><h4>Unterschreiben</h4><p>Touch auf Tablet</p></div></button>
+          <button class="sim-step-btn" data-step="4"><div class="ssb-num">✓</div><div class="ssb-text"><h4>Archiviert</h4><p>PDF + Timestamp</p></div></button>
+        </div>
+        <div class="sim-display">
+          <div class="sim-panel active" data-panel="0">
+            <h3>Referenz <em>eingeben</em></h3>
+            <p>Auftragsnummer eintippen, Barcode scannen oder QR-Code halten — HandOver erkennt alle drei.</p>
+            <div class="sim-input-demo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg><span class="sim-input-val">AUF-2024-8821<span class="sim-cursor"></span></span></div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <span style="background:var(--pantone-fog);border-radius:20px;padding:4px 12px;font-size:.74rem;color:var(--text-mid);">⌨️ Tastatur</span>
+              <span style="background:var(--pantone-fog);border-radius:20px;padding:4px 12px;font-size:.74rem;color:var(--text-mid);">📷 Barcode</span>
+              <span style="background:var(--pantone-fog);border-radius:20px;padding:4px 12px;font-size:.74rem;color:var(--text-mid);">⬛ QR-Code</span>
+            </div>
+          </div>
+          <div class="sim-panel" data-panel="1">
+            <h3>Daten <em>automatisch</em> geladen</h3>
+            <p>Auftragsdaten direkt via API oder CSV — kein manueller Eingriff nötig.</p>
+            <div class="sim-data-grid">
+              <div class="sim-data-card"><div class="k">Auftrag</div><div class="v">AUF-2024-8821</div></div>
+              <div class="sim-data-card"><div class="k">Empfänger</div><div class="v">Müller AG</div></div>
+              <div class="sim-data-card"><div class="k">Artikel</div><div class="v">Hydraulikpumpe ×3</div></div>
+              <div class="sim-data-card"><div class="k">Lagerplatz</div><div class="v">A-12 / Regal 4</div></div>
+            </div>
+            <div class="sim-check-badge">✓ &nbsp;In 0.8 Sekunden geladen</div>
+          </div>
+          <div class="sim-panel" data-panel="2">
+            <h3>Dokument wird <em>gedruckt</em></h3>
+            <p>Ein Klick — HandOver sendet direkt an den Netzwerkdrucker. Kein Treiber, keine Wartezeit.</p>
+            <div class="sim-printer">
+              <div class="sim-printer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+              <div class="sim-printer-info"><p>Lager-Drucker A</p><p>192.168.1.45 · Online · Bereit</p></div>
+            </div>
+            <div class="sim-print-progress"><div class="sim-print-fill" id="sim-print-fill"></div></div>
+          </div>
+          <div class="sim-panel" data-panel="3">
+            <h3>Digital <em>unterschreiben</em></h3>
+            <p>Empfänger unterschreibt auf Tablet oder Touchscreen. Tippe auf das Feld um es auszuprobieren.</p>
+            <div class="sim-sig-pad" id="sim-sig-pad">
+              <span class="sim-sig-hint" id="sim-sig-hint">Hier tippen zum Unterschreiben</span>
+              <span class="sim-sig-signed" id="sim-sig-signed">M. Müller</span>
+            </div>
+            <div class="sim-check-badge" id="sim-sig-badge" style="display:none;">✓ &nbsp;Signatur gespeichert · <span id="sim-sig-ts"></span></div>
+          </div>
+          <div class="sim-panel" data-panel="4">
+            <h3>Automatisch <em>archiviert</em></h3>
+            <p>Signiertes PDF mit Timestamp — sofort durchsuchbar und jederzeit abrufbar.</p>
+            <div class="sim-archive">
+              <div class="sim-archive-file">
+                <div class="sim-archive-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
+                <div class="sim-archive-meta"><p>AUF-2024-8821_signiert.pdf</p><p>124 KB · Heute · mit Signatur &amp; Audit-Log</p></div>
+              </div>
+              <div class="sim-check-badge">✓ &nbsp;Gesamtzeit: 47 Sekunden</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="comparison">
+    <div style="max-width:960px;margin:0 auto;">
+      <div style="text-align:center;"><span class="section-tag">Vorher / Nachher</span></div>
+      <h2 class="section-title" style="text-align:center;">HandOver vs. <em>Papier & Excel</em></h2>
+      <div class="comparison-grid">
+        <div class="comp-col comp-old">
+          <div class="comp-header">❌ &nbsp;Papier & Excel — heute</div>
+          <div class="comp-row"><div class="comp-icon">⏱️</div><div class="comp-text"><p>5–15 Minuten pro Übergabe</p><p>Suchen, ausfüllen, abheften, eintippen — jedes Mal.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">🔍</div><div class="comp-text"><p>Keine Durchsuchbarkeit</p><p>Wer hat wann unterschrieben? Ordner wälzen.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">✏️</div><div class="comp-text"><p>Fehleranfällig & unleserlich</p><p>Handschrift, Tippfehler, falsche Formulare.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">📦</div><div class="comp-text"><p>Physische Ablage nötig</p><p>Aktenordner, Archivraum, Platzbedarf.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">⚖️</div><div class="comp-text"><p>Compliance-Risiko</p><p>Fehlende Unterschriften, kein Audit-Log.</p></div></div>
+        </div>
+        <div class="comp-col comp-new">
+          <div class="comp-header">✓ &nbsp;HandOver — neu</div>
+          <div class="comp-row"><div class="comp-icon">⚡</div><div class="comp-text"><p>Unter 60 Sekunden</p><p>Referenz eingeben — der Rest läuft automatisch.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">🔎</div><div class="comp-text"><p>Vollständig durchsuchbar</p><p>Jede Übergabe abrufbar — nach Datum, Name, Auftrag.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">✅</div><div class="comp-text"><p>Immer korrekt & lesbar</p><p>Daten aus dem System — kein manueller Eingriff.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">☁️</div><div class="comp-text"><p>Digitales Archiv</p><p>PDFs mit Signatur & Timestamp, kein Papier.</p></div></div>
+          <div class="comp-row"><div class="comp-icon">🔒</div><div class="comp-text"><p>Lückenloses Audit-Log</p><p>Wer, wann, was — automatisch, rechtssicher.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="text-align:center;"><span class="section-tag">Features</span></div>
+      <h2 class="section-title" style="text-align:center;">Alles was du <em>brauchst</em>.</h2>
+      <div class="features-grid">
+        <div class="feat-card"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg><h3>Referenz-Input</h3><p>Tastatur, Barcode-Scanner oder QR-Code — automatisch erkannt.</p></div>
+        <div class="feat-card"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg><h3>Auto-Datenabruf</h3><p>Auftragsdaten via REST-API oder CSV — null manuelle Eingabe.</p></div>
+        <div class="feat-card"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><h3>Auto-Druck</h3><p>Push-Druck an Netzwerkdrucker — ein Klick, kein Treiber.</p></div>
+        <div class="feat-card"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg><h3>Digitale Unterschrift</h3><p>Touch oder Stylus — rechtssicher, sofort gespeichert.</p></div>
+        <div class="feat-card"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><h3>Automatisches Archiv</h3><p>PDF mit Signatur & Timestamp — durchsuchbar, jederzeit abrufbar.</p></div>
+        <div class="feat-card"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg><h3>Audit-Log</h3><p>Wer, wann, was — lückenlos protokolliert. Compliance ohne Aufwand.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="pricing-inner">
+      <span class="section-tag" style="color:var(--sakura-2);">Preise</span>
+      <h2 class="section-title">Transparent. <em>Fair.</em></h2>
+      <p>HandOver ist noch in Entwicklung — die Preise werden mit dem Launch bekannt gegeben. Als Beta-Kunde erhältst du dauerhaft bevorzugte Konditionen.</p>
+      <div class="pricing-box">
+        <div class="pb-kanji">価</div>
+        <p><strong>Preise folgen mit dem Beta-Launch</strong>Trag dich auf die Waitlist ein — Beta-Kunden erhalten Frühbucherkonditionen und gestalten das Produkt mit.</p>
+      </div>
+      <br/>
+      <a href="#waitlist" class="btn-primary">Jetzt auf Waitlist</a>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section id="waitlist">
+    <div class="waitlist-inner">
+      <span class="section-tag" style="display:block;">Waitlist</span>
+      <h2 class="section-title">Sei dabei von <em>Anfang an</em>.</h2>
+      <p>Beta-Kunden erhalten bevorzugten Zugang, Frühbucherkonditionen und direkten Einfluss auf das Produkt.</p>
+      <div class="wl-form" id="wl-form">
+        <div class="wl-row">
+          <div class="wl-field"><label class="wl-label" for="wl-name">Name *</label><input class="wl-input" id="wl-name" type="text" placeholder="Max Muster" /></div>
+          <div class="wl-field"><label class="wl-label" for="wl-email">E-Mail *</label><input class="wl-input" id="wl-email" type="email" placeholder="max@firma.ch" /></div>
+        </div>
+        <div class="wl-field"><label class="wl-label" for="wl-msg">Nachricht <span style="opacity:.4">(optional)</span></label><textarea class="wl-input wl-textarea" id="wl-msg" placeholder="Erzähl uns kurz von deinem Betrieb…"></textarea></div>
+        <button class="wl-submit" id="wl-submit">Auf Waitlist eintragen</button>
+      </div>
+      <div class="wl-success" id="wl-success">
+        <p>Du bist dabei. 🌸</p>
+        <p>Wir melden uns sobald HandOver in die Beta geht — du bist unter den Ersten.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Shoriu · Adam Kovacs · Altach, Österreich</span>
+      <div class="footer-links-row">
+        <a href="/">Shoriu</a>
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+      </div>
+      <span class="footer-jp">書流 · 渡しの瞬間を、完璧に。</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false">
+
+    /* AUTOMATED DEMO */
+    var autoTimer = null;
+    function setDot(step) {
+      for (var i = 0; i < 5; i++) {
+        var d = document.getElementById('dot-'+i), l = document.getElementById('lbl-'+i);
+        d.classList.remove('active','done'); l.classList.remove('active');
+        if (i < step) d.classList.add('done');
+        else if (i === step) { d.classList.add('active'); l.classList.add('active'); }
+      }
+    }
+    function showSlide(n) {
+      for (var i = 0; i < 5; i++) {
+        var s = document.getElementById('slide-'+i);
+        s.classList.remove('active','exit');
+        if (i === n) s.classList.add('active');
+        else if (i < n) s.classList.add('exit');
+      }
+      setDot(n);
+    }
+    function runStep0() {
+      showSlide(0);
+      var text = 'AUF-2024-8821', el = document.getElementById('auto-typing'), i = 0;
+      el.textContent = '';
+      var t = setInterval(function() {
+        el.textContent += text[i++];
+        if (i >= text.length) {
+          clearInterval(t);
+          var bar = document.getElementById('load-bar'), pct = 0;
+          var pb = setInterval(function() {
+            pct += 4; bar.style.width = pct+'%';
+            if (pct >= 100) { clearInterval(pb); autoTimer = setTimeout(runStep1, 500); }
+          }, 35);
+        }
+      }, 75);
+    }
+    function runStep1() { showSlide(1); autoTimer = setTimeout(runStep2, 2000); }
+    function runStep2() {
+      showSlide(2);
+      var bar = document.getElementById('print-bar'), st = document.getElementById('print-status'), pct = 0;
+      bar.style.width = '0%';
+      var t = setInterval(function() {
+        pct += 3; bar.style.width = pct+'%';
+        if (pct >= 60) st.textContent = 'Wird gedruckt…';
+        if (pct >= 100) { clearInterval(t); st.textContent = '✓ Gedruckt'; autoTimer = setTimeout(runStep3, 700); }
+      }, 35);
+    }
+    function runStep3() {
+      showSlide(3);
+      var now = new Date();
+      document.getElementById('sig-time').textContent = now.toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});
+      autoTimer = setTimeout(function() {
+        document.getElementById('sig-hint').style.display = 'none';
+        document.getElementById('sig-drawn').style.opacity = '1';
+        autoTimer = setTimeout(runStep4, 1200);
+      }, 1400);
+    }
+    function runStep4() { showSlide(4); autoTimer = setTimeout(runStep0, 4000); }
+
+    var demoObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) { runStep0(); demoObs.disconnect(); }
+    }, { threshold: 0.3 });
+    demoObs.observe(document.getElementById('demo-auto'));
+
+    /* INTERACTIVE SIM */
+    var simPrintDone = false, simSigDone = false;
+    document.querySelectorAll('.sim-step-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var step = parseInt(btn.getAttribute('data-step'));
+        document.querySelectorAll('.sim-step-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('.sim-panel').forEach(function(p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        document.querySelector('[data-panel="'+step+'"]').classList.add('active');
+        if (step === 2 && !simPrintDone) {
+          simPrintDone = true;
+          setTimeout(function() { document.getElementById('sim-print-fill').style.width = '100%'; }, 150);
+        }
+        if (step === 3) {
+          document.getElementById('sim-sig-pad').onclick = function() {
+            if (simSigDone) return; simSigDone = true;
+            document.getElementById('sim-sig-hint').style.display = 'none';
+            document.getElementById('sim-sig-signed').style.opacity = '1';
+            var badge = document.getElementById('sim-sig-badge');
+            document.getElementById('sim-sig-ts').textContent = new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});
+            badge.style.display = 'inline-flex';
+          };
+        }
+      });
+    });
+
+    /* WAITLIST */
+    document.getElementById('wl-submit').addEventListener('click', function() {
+      var name = document.getElementById('wl-name').value.trim();
+      var email = document.getElementById('wl-email').value.trim();
+      var msg = document.getElementById('wl-msg').value.trim();
+      var valid = true;
+      ['wl-name','wl-email'].forEach(function(id) { document.getElementById(id).style.borderColor = ''; });
+      if (!name)  { document.getElementById('wl-name').style.borderColor = '#C5546A'; valid = false; }
+      if (!email || !email.includes('@')) { document.getElementById('wl-email').style.borderColor = '#C5546A'; valid = false; }
+      if (!valid) return;
+      var btn = document.getElementById('wl-submit');
+      btn.textContent = 'Wird eingetragen…'; btn.disabled = true;
+      emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, { to_email:email, to_name:name, name:name, email:email, message:msg||'—' })
+      .then(function() {
+        document.getElementById('wl-form').style.display = 'none';
+        document.getElementById('wl-success').style.display = 'block';
+      })
+      .catch(function() {
+        document.getElementById('wl-form').style.display = 'none';
+        document.getElementById('wl-success').style.display = 'block';
+      });
+    });
+
+  </script>
+</body>
+</html>
