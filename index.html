@@ -232,13 +232,47 @@
     .footer-legal a:hover { color: var(--sakura-2); }
 
     @media (max-width: 768px) {
-      #about { grid-template-columns: 1fr; }
-      .about-visual { min-height: 220px; }
+      /* NAV */
+      nav { padding: 0 4%; }
       .nav-links { display: none; }
-      .footer-links { gap: 2rem; }
+
+      /* HERO */
+      #hero { padding: 90px 5% 60px; }
+      .hero-title { font-size: clamp(2.8rem, 13vw, 5rem); }
+      .hero-sub { font-size: .92rem; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .hero-actions a { width: 100%; max-width: 300px; text-align: center; }
+
+      /* HANDOVER SECTION */
+      #handover { padding: 70px 5%; }
+      .handover-title { font-size: clamp(2.4rem, 12vw, 4rem); }
       .workflow { flex-direction: column; }
       .wf-step { border-right: 1px solid rgba(232,137,154,.1); }
       .wf-arrow { display: none; }
+      .features-dark { grid-template-columns: 1fr; }
+      .waitlist-box { padding: 0 .5rem; }
+      .form-row { grid-template-columns: 1fr; }
+
+      /* ABOUT */
+      #about { grid-template-columns: 1fr; }
+      .about-visual { min-height: 200px; }
+      .about-text { padding: 50px 6%; }
+
+      /* VALUES */
+      #values { padding: 70px 5%; }
+      .values-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      /* FOOTER */
+      .footer-top { flex-direction: column; gap: 2rem; }
+      .footer-links { gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: .5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(2.4rem, 15vw, 3.5rem); }
+      .values-grid { grid-template-columns: 1fr; }
+      .handover-tagline { font-size: 1.05rem; }
+      .features-dark { grid-template-columns: 1fr; }
     }
 
     /* ── Contact Modal ── */
