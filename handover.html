@@ -237,6 +237,8 @@
       nav { padding: 0 4%; }
       .nav-right { gap: 1rem; }
       .back-link { display: none; }
+      .hamburger { display: flex; }
+      .nav-links { display: none; }
 
       /* HERO */
       #hero { padding: 90px 5% 60px; }
@@ -296,6 +298,21 @@
       .tb-title { display: none; }
       .sim-tb-name { font-size: .82rem; }
     }
+
+    /* ── Hamburger Menu ── */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; z-index: 200; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--pantone-ink); border-radius: 2px; transition: transform .3s, opacity .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(253,250,249,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(232,137,154,.15); z-index: 99; padding: 1.2rem 5%; flex-direction: column; gap: .2rem; animation: menuSlide .25s ease; }
+    .mobile-menu.open { display: flex; }
+    @keyframes menuSlide { from{opacity:0;transform:translateY(-8px);} to{opacity:1;transform:translateY(0);} }
+    .mobile-menu a { text-decoration: none; font-size: .88rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); padding: .85rem 0; border-bottom: 1px solid rgba(197,84,106,.08); transition: color .2s; }
+    .mobile-menu a:hover { color: var(--sakura-4); }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .mob-cta { margin-top: .6rem; background: var(--pantone-ink); color: var(--white) !important; text-align: center; padding: .85rem !important; border-radius: 8px; border: none !important; }
+    .mobile-menu .mob-cta:hover { background: var(--sakura-4) !important; }
   </style>
 </head>
 <body>
@@ -314,7 +331,17 @@
       <li><a href="/anfrage.html">Individuelle Lösung</a></li>
       <li><a href="#waitlist" class="nav-cta">Waitlist</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/handover.html">HandOver</a>
+    <a href="/#about">Über uns</a>
+    <a href="/anfrage.html">Individuelle Lösung</a>
+    <a href="#waitlist" class="mob-cta">Waitlist</a>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
